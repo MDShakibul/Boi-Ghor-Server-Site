@@ -49,8 +49,8 @@ async function run(){
         const email = req.query.email;
         const query = { email: email };
         const cursor = addBookCollection.find(query);
-        const orders = await cursor.toArray();
-        res.send(orders);
+        const result = await cursor.toArray();
+        res.send(result);
     })
     }
     finally{
