@@ -37,12 +37,21 @@ async function run(){
             res.send(result);
         })
 
-        //add item
+        //add book
         app.post('/newbook', async (req, res) => {
           const NewBook = req.body;
           const result = await addBookCollection.insertOne(NewBook);
           res.send(result);
       })
+
+      // show book
+      app.get('/newbook', async (req, res) => {
+        const email = req.query.email;
+        const query = { email: email };
+        const cursor = addBookCollection.find(query);
+        const orders = await cursor.toArray();
+        res.send(orders);
+    })
     }
     finally{
 
