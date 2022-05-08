@@ -19,6 +19,7 @@ async function run(){
     try{
         await client.connect();
         const bookCollection = client.db('boiGhor').collection('books');
+        const addBookCollection = client.db('boiGhor').collection('newbooks');
 
         //all data get
         app.get('/books', async(req,res) =>{
@@ -35,6 +36,13 @@ async function run(){
             const result = await bookCollection.deleteOne(query);
             res.send(result);
         })
+
+        //add item
+        app.post('/newbook', async (req, res) => {
+          const NewBook = req.body;
+          const result = await addBookCollection.insertOne(NewBook);
+          res.send(result);
+      })
     }
     finally{
 
